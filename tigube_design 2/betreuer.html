@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Für Betreuungspersonen — tigube</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Nunito:wght@400;500;600;700;800;900&display=swap" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .bt-hero { padding: clamp(48px,7vw,96px) 0 clamp(40px,5vw,72px); }
+    .bt-hero-grid { display:grid; grid-template-columns: 1.05fr 1fr; gap: clamp(32px,6vw,72px); align-items:center; }
+    .bt-hero h1 .accent { color: var(--brand); font-style: italic; font-family: var(--serif); font-weight: 400; }
+    .bt-hero .lead { margin: 24px 0 28px; }
+    .bt-meta { display:flex; gap:32px; margin-top:32px; flex-wrap:wrap; padding-top:24px; border-top:1px solid var(--line); }
+    .bt-meta .n { font-size:32px; font-weight:900; color:var(--brand); line-height:1; letter-spacing:-0.02em; }
+    .bt-meta .l { font-size:13px; color:var(--ink-mute); margin-top:6px; display:block; }
+
+    .benefits { display:grid; grid-template-columns: repeat(3,1fr); gap:24px; }
+    .benefit { background:#fff; border:1px solid var(--line-soft); border-radius: var(--radius-lg); padding:32px; display:flex; flex-direction:column; gap:14px; transition: transform .25s, box-shadow .25s; }
+    [data-theme="dark"] .benefit { background: var(--surface); }
+    .benefit:hover { transform: translateY(-4px); box-shadow: 0 24px 60px -30px rgba(20,20,15,.2); }
+    .benefit .ic { width:48px; height:48px; border-radius:14px; background:var(--brand-soft); color:var(--brand); display:grid; place-items:center; }
+    .benefit h3 { font-size:18px; }
+    .benefit p { font-size:14.5px; color:var(--ink-soft); margin:0; }
+    @media (max-width:920px){ .benefits{ grid-template-columns: 1fr; } }
+
+    .steps-vert { max-width:760px; margin:0 auto; display:grid; gap:0; counter-reset: stepv; }
+    .stepv { display:grid; grid-template-columns: 56px 1fr; gap:20px; padding:24px 0; border-bottom:1px solid var(--line); position:relative; }
+    .stepv:last-child { border-bottom:0; }
+    .stepv .num { width:44px; height:44px; border-radius:50%; background:var(--brand); color:#fff; font-weight:900; display:grid; place-items:center; font-size:16px; }
+    .stepv h3 { font-size:20px; margin-bottom:6px; }
+    .stepv p { color:var(--ink-soft); margin:0; max-width:60ch; }
+
+    .earnings { background:#fff; border:1px solid var(--line); border-radius: var(--radius-lg); padding: clamp(28px,4vw,40px); display:grid; grid-template-columns: 1fr 1fr; gap:40px; align-items:center; }
+    [data-theme="dark"] .earnings { background: var(--surface); }
+    .earnings h2 { font-size: clamp(24px,2.6vw,32px); margin-bottom:12px; }
+    .earnings p { color:var(--ink-soft); margin: 0 0 18px; }
+    .earn-rows { display:grid; gap:10px; }
+    .earn-row { display:flex; justify-content:space-between; align-items:baseline; padding:14px 16px; background:var(--bg-soft); border-radius:12px; }
+    .earn-row .label { font-weight:700; }
+    .earn-row .val { font-weight:900; font-size:18px; color:var(--brand); letter-spacing:-0.01em; }
+    .earn-row .sub { font-size:12px; color:var(--ink-mute); font-weight:600; margin-left:6px; }
+    .earn-note { font-size:13px; color:var(--ink-mute); margin-top:14px; }
+    @media (max-width:760px){ .earnings{ grid-template-columns: 1fr; } }
+
+    .profile-mock { background:#fff; border:1px solid var(--line); border-radius: var(--radius-lg); overflow:hidden; max-width:520px; margin:0 auto; box-shadow: 0 24px 60px -30px rgba(20,20,15,.2); }
+    [data-theme="dark"] .profile-mock { background: var(--surface); }
+    .pm-cover { height:140px; background:linear-gradient(120deg, var(--brand-soft), var(--brand)); }
+    .pm-body { padding: 0 24px 24px; margin-top:-44px; }
+    .pm-av { width:88px; height:88px; border-radius:50%; background:#fff; padding:4px; }
+    .pm-av div { width:100%; height:100%; border-radius:50%; background: url("https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&q=80") center/cover; }
+    .pm-name { font-size:22px; font-weight:900; margin-top:14px; letter-spacing:-0.01em; }
+    .pm-meta { font-size:13px; color:var(--ink-mute); margin-top:4px; display:flex; gap:12px; flex-wrap:wrap; }
+    .pm-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:14px; }
+    .pm-tag { font-size:12px; font-weight:700; background: var(--brand-soft); color: var(--brand-deep); padding:5px 11px; border-radius:999px; }
+    .pm-stats { display:grid; grid-template-columns: repeat(3,1fr); gap:8px; margin-top:18px; padding-top:18px; border-top:1px solid var(--line-soft); }
+    .pm-stats div { text-align:center; }
+    .pm-stats .pv { font-weight:900; font-size:18px; color:var(--brand); }
+    .pm-stats .pl { font-size:11px; color:var(--ink-mute); font-weight:600; text-transform:uppercase; letter-spacing:0.04em; }
+
+    .profile-split { display:grid; grid-template-columns: 1fr 1fr; gap: clamp(32px,5vw,64px); align-items:center; }
+    @media (max-width:860px){ .profile-split{ grid-template-columns: 1fr; } }
+
+    .stories { display:grid; grid-template-columns: repeat(3,1fr); gap:20px; }
+    .story { background:#fff; border:1px solid var(--line-soft); border-radius: var(--radius-lg); overflow:hidden; }
+    [data-theme="dark"] .story { background: var(--surface); }
+    .story img { aspect-ratio: 4/3; width:100%; object-fit:cover; }
+    .story .body { padding: 22px 24px 24px; }
+    .story .q { font-family: var(--serif); font-style:italic; font-size:18px; line-height:1.4; margin-bottom:14px; }
+    .story .n { font-weight:800; font-size:14px; }
+    .story .s { font-size:12.5px; color:var(--ink-mute); }
+    @media (max-width:760px){ .stories{ grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body data-screen-label="06 Betreuer">
+
+  <header class="site-header">
+    <div class="container nav">
+      <a href="index.html" class="logo">tigube</a>
+      <nav class="nav-links">
+        <a href="tierhalter.html">Für Tierhalter:innen</a>
+        <a href="betreuer.html" class="is-active">Für Betreuungspersonen</a>
+        <a href="preise.html">Preise</a>
+        <a href="faq.html">FAQ</a>
+        <a href="ueber-uns.html">Über uns</a>
+      </nav>
+      <div class="nav-cta">
+        <a href="#" class="btn btn-ghost btn-sm">Login</a>
+        <a href="#" class="btn btn-primary btn-sm">Registrieren</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="bt-hero">
+    <div class="container bt-hero-grid">
+      <div class="reveal">
+        <h1>Mach deine Tierliebe <span class="accent">sichtbar.</span></h1>
+        <p class="lead">Werde Teil einer lokalen Community geprüfter Betreuungspersonen — eigenes Profil, faire Bedingungen, echte Anfragen.</p>
+        <div class="hero-actions">
+          <a href="#start" class="btn btn-primary btn-lg">Kostenlos registrieren</a>
+          <a href="#how" class="btn btn-ghost btn-lg">Wie es funktioniert</a>
+        </div>
+        <div class="bt-meta">
+          <div><div class="n">0%</div><span class="l">Provision auf Buchungen</span></div>
+          <div><div class="n">3 Mon.</div><span class="l">Premium gratis</span></div>
+          <div><div class="n">24h</div><span class="l">Ø Antwortzeit</span></div>
+        </div>
+      </div>
+      <div class="hero-card reveal">
+        <img src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?w=900&q=80&auto=format&fit=crop" alt="Betreuungsperson mit Hund im Park" />
+        <div class="hero-pill"><span class="avatars"><span class="av">★</span><span class="av">♥</span><span class="av">🐾</span></span>Verifiziert-Badge</div>
+        <div class="hero-info">
+          <span class="badge">€</span>
+          <div><div class="t">Direkte Bezahlung</div><div class="s">Keine Provision · Du behältst alles</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="how">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Warum tigube für Betreuer:innen</h2>
+        <p class="lead">Eine Plattform, die deine Arbeit ernst nimmt — und dafür sorgt, dass die richtigen Menschen dich finden.</p>
+      </div>
+      <div class="benefits">
+        <div class="benefit reveal">
+          <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 10c0 7-8 12-8 12s-8-5-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <h3>Lokale Sichtbarkeit</h3>
+          <p>Du wirst von Halter:innen in deinem Umkreis gefunden — nicht von Massen aus dem ganzen Land.</p>
+        </div>
+        <div class="benefit reveal">
+          <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+          <h3>0% Provision</h3>
+          <p>Bezahlung läuft direkt zwischen dir und der Halterin. Wir verdienen nur an freiwilligem Premium.</p>
+        </div>
+        <div class="benefit reveal">
+          <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg></div>
+          <h3>Geprüfte Community</h3>
+          <p>Jede Person spricht persönlich mit unserem Team — du arbeitest in einem Netzwerk, das Vertrauen ernst nimmt.</p>
+        </div>
+        <div class="benefit reveal">
+          <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+          <h3>Eigene Verfügbarkeit</h3>
+          <p>Kalender und Anfragen unter deiner Kontrolle — du entscheidest, wann und wen du betreust.</p>
+        </div>
+        <div class="benefit reveal">
+          <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/></svg></div>
+          <h3>Verifiziert-Badge</h3>
+          <p>Sachkundenachweise und Referenzen werden sichtbar — Premium hebt dich zusätzlich hervor.</p>
+        </div>
+        <div class="benefit reveal">
+          <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <h3>Persönlicher Support</h3>
+          <p>Bei Fragen erreichst du echte Menschen — keine Tickets, keine Chatbots.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>In vier Schritten startklar</h2>
+      </div>
+      <div class="steps-vert reveal">
+        <div class="stepv"><span class="num">1</span><div><h3>Profil anlegen</h3><p>Erzähl von dir und deiner Erfahrung mit Tieren. Lade Fotos und Sachkundenachweise hoch.</p></div></div>
+        <div class="stepv"><span class="num">2</span><div><h3>Briefing-Gespräch</h3><p>Wir lernen dich in einem kurzen Videocall persönlich kennen — kein Test, sondern ein echtes Gespräch.</p></div></div>
+        <div class="stepv"><span class="num">3</span><div><h3>Freischaltung</h3><p>Nach erfolgreichem Briefing wirst du im lokalen Suchergebnis sichtbar — meist innerhalb von 48 Stunden.</p></div></div>
+        <div class="stepv"><span class="num">4</span><div><h3>Anfragen annehmen</h3><p>Halter:innen schreiben dich direkt an. Du entscheidest, welche Anfrage zu dir und deinem Kalender passt.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="how">
+    <div class="container">
+      <div class="earnings reveal">
+        <div>
+          <h2>Was du verdienen kannst</h2>
+          <p>Die durchschnittlichen Preise unserer aktiven Betreuer:innen — du legst sie selbst fest.</p>
+          <p class="earn-note">Werte basierend auf Profilen mit Verifiziert-Badge in 48 Städten. Halter zahlen direkt — keine Provision an tigube.</p>
+        </div>
+        <div class="earn-rows">
+          <div class="earn-row"><span class="label">Gassi-Runde</span><span><span class="val">15–22€</span><span class="sub">/ 30–60 Min.</span></span></div>
+          <div class="earn-row"><span class="label">Tagesbetreuung</span><span><span class="val">22–35€</span><span class="sub">/ Tag</span></span></div>
+          <div class="earn-row"><span class="label">Übernachtung</span><span><span class="val">35–55€</span><span class="sub">/ Nacht</span></span></div>
+          <div class="earn-row"><span class="label">Katzen-Hausbesuch</span><span><span class="val">15–22€</span><span class="sub">/ Besuch</span></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>So sieht dein Profil aus</h2>
+        <p class="lead">Klar, persönlich und glaubwürdig — strukturiert, damit das Wichtige sofort sichtbar wird.</p>
+      </div>
+      <div class="profile-split">
+        <div class="reveal">
+          <div class="profile-mock">
+            <div class="pm-cover"></div>
+            <div class="pm-body">
+              <div class="pm-av"><div></div></div>
+              <div class="pm-name">Anna L.</div>
+              <div class="pm-meta"><span>📍 Hamburg-Eimsbüttel</span><span>✓ Verifiziert</span><span>★ 4.9 (38)</span></div>
+              <div class="pm-tags"><span class="pm-tag">Hund</span><span class="pm-tag">Sachkundenachweis</span><span class="pm-tag">Tagesbetreuung</span><span class="pm-tag">Gassi</span></div>
+              <div class="pm-stats">
+                <div><div class="pv">3 Jahre</div><div class="pl">Erfahrung</div></div>
+                <div><div class="pv">142</div><div class="pl">Betreuungen</div></div>
+                <div><div class="pv">24h</div><div class="pl">Antwortzeit</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="reveal">
+          <h3 style="font-size:24px;margin-bottom:14px">Was dein Profil ausmacht</h3>
+          <ul class="how-card" style="list-style:none;padding:0;margin:0;display:grid;gap:14px;background:transparent;border:0;box-shadow:none">
+            <li style="display:grid;grid-template-columns:22px 1fr;gap:12px;align-items:start"><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>Echte Fotos und ein persönlicher Steckbrief</li>
+            <li style="display:grid;grid-template-columns:22px 1fr;gap:12px;align-items:start"><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>Sachkundenachweise und Qualifikationen sichtbar</li>
+            <li style="display:grid;grid-template-columns:22px 1fr;gap:12px;align-items:start"><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>Erfahrung mit konkreten Tierarten und Sondersituationen</li>
+            <li style="display:grid;grid-template-columns:22px 1fr;gap:12px;align-items:start"><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>Bewertungen und Referenzen aus echten Betreuungen</li>
+            <li style="display:grid;grid-template-columns:22px 1fr;gap:12px;align-items:start"><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>Eigene Preise, eigener Kalender, eigene Spielregeln</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="founders">
+    <div class="container">
+      <div class="section-head reveal"><h2>Stimmen aus der Community</h2></div>
+      <div class="stories">
+        <article class="story reveal">
+          <img src="https://images.unsplash.com/photo-1551717743-49959800b1f6?w=600&q=80&auto=format&fit=crop" alt="" />
+          <div class="body">
+            <p class="q">„Über tigube habe ich endlich Stammkund:innen in meiner Straße gefunden. Kein langer Weg, viel Vertrauen."</p>
+            <div class="n">Anna L.</div><div class="s">Hamburg · seit 2024</div>
+          </div>
+        </article>
+        <article class="story reveal">
+          <img src="https://images.unsplash.com/photo-1581888227599-779811939961?w=600&q=80&auto=format&fit=crop" alt="" />
+          <div class="body">
+            <p class="q">„Das Briefing war fair — keine Hürde, sondern ein Gespräch. Genau das macht den Unterschied."</p>
+            <div class="n">Markus B.</div><div class="s">München · seit 2024</div>
+          </div>
+        </article>
+        <article class="story reveal">
+          <img src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=600&q=80&auto=format&fit=crop" alt="" />
+          <div class="body">
+            <p class="q">„Ich kann meine Termine selbst gestalten und behalte alles, was ich verdiene. Das fühlt sich richtig an."</p>
+            <div class="n">Sophie K.</div><div class="s">Wien · seit 2023</div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-head reveal"><h2>Häufige Fragen</h2></div>
+      <div class="faq-narrow reveal">
+        <details class="faq-item"><summary class="faq-trigger">Brauche ich eine Ausbildung?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary><div class="faq-panel"><div><p>Eine formelle Ausbildung ist nicht zwingend. Sachkundenachweise und Praxiserfahrung erhöhen Sichtbarkeit und Vertrauen.</p></div></div></details>
+        <details class="faq-item"><summary class="faq-trigger">Was kostet mich tigube als Betreuer:in?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary><div class="faq-panel"><div><p>Die Registrierung und Anfragen sind kostenlos. Premium (9€/Monat) ist optional — aktuell die ersten 3 Monate gratis.</p></div></div></details>
+        <details class="faq-item"><summary class="faq-trigger">Wie schnell kann ich starten?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary><div class="faq-panel"><div><p>Nach Profilanlage und Briefing-Gespräch — meist innerhalb von 48 Stunden bist du im lokalen Suchergebnis sichtbar.</p></div></div></details>
+        <details class="faq-item"><summary class="faq-trigger">Bin ich versichert?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary><div class="faq-panel"><div><p>Wir empfehlen eine eigene Haftpflicht mit Tierhüter-Klausel. Premium-Mitglieder erhalten Konditionen über unsere Partner.</p></div></div></details>
+      </div>
+      <div class="faq-foot reveal"><a href="faq.html">Alle Fragen ansehen →</a></div>
+    </div>
+  </section>
+
+  <section class="cta-section" id="start">
+    <div class="container">
+      <div class="cta-card reveal">
+        <div class="cta-text">
+          <h2>Bereit, Teil der tigube Community zu werden?</h2>
+          <p>Registrierung kostenlos · 3 Monate Premium gratis · Jederzeit kündbar.</p>
+          <div class="actions"><a href="#" class="btn btn-primary">Als Betreuer starten</a><a href="preise.html" class="btn btn-ghost">Preise ansehen</a></div>
+        </div>
+        <div class="cta-image"><img src="https://images.unsplash.com/photo-1601758174039-c2e1a5be0a8b?w=800&q=80&auto=format&fit=crop" alt="" /></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand"><a href="index.html" class="logo">tigube</a><p>Deutschlands vertrauensvolle Plattform für professionelle Tierbetreuung.</p></div>
+        <div class="footer-col"><h4>Für Tierhalter:innen</h4><ul><li><a href="tierhalter.html">Betreuer finden</a></li><li><a href="preise.html">Preise</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
+        <div class="footer-col"><h4>Für Betreuungspersonen</h4><ul><li><a href="betreuer.html">Anbieten</a></li><li><a href="preise.html">Preise</a></li></ul></div>
+        <div class="footer-col"><h4>Unternehmen</h4><ul><li><a href="ueber-uns.html">Über uns</a></li><li><a href="#">Kontakt</a></li><li><a href="#">Impressum</a></li><li><a href="#">Datenschutz</a></li></ul></div>
+      </div>
+      <div class="footer-bottom"><span>© 2026 tigube.</span><span>Mit ♥ gemacht in Moos &amp; Hamburg</span></div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script type="text/babel" src="tweaks-panel.jsx"></script>
+  <script type="text/babel" src="tweaks.jsx"></script>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Für Tierhalter:innen — tigube</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Nunito:wght@400;500;600;700;800;900&display=swap" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .th-hero { padding: clamp(48px,7vw,96px) 0 clamp(40px,5vw,72px); }
+    .th-hero-grid { display:grid; grid-template-columns: 1.05fr 1fr; gap: clamp(32px,6vw,72px); align-items:center; }
+    .th-hero h1 .accent { color: var(--brand); font-style: italic; font-family: var(--serif); font-weight: 400; }
+    .th-hero .lead { margin: 24px 0 28px; }
+    .th-meta { display:flex; gap:32px; margin-top:32px; flex-wrap:wrap; padding-top:24px; border-top:1px solid var(--line); }
+    .th-meta .n { font-size:32px; font-weight:900; color:var(--brand); line-height:1; letter-spacing:-0.02em; }
+    .th-meta .l { font-size:13px; color:var(--ink-mute); margin-top:6px; display:block; }
+
+    .steps { display:grid; grid-template-columns: repeat(4, 1fr); gap:24px; counter-reset: step; }
+    .step { background:#fff; border:1px solid var(--line-soft); border-radius: var(--radius-lg); padding:28px; display:flex; flex-direction:column; gap:14px; transition: transform .25s, box-shadow .25s; }
+    [data-theme="dark"] .step { background: var(--surface); }
+    .step:hover { transform: translateY(-4px); box-shadow: 0 24px 60px -30px rgba(20,20,15,.2); }
+    .step .num { width:36px; height:36px; border-radius:50%; background:var(--brand-soft); color:var(--brand); font-weight:900; display:grid; place-items:center; font-size:15px; }
+    .step h3 { font-size:18px; }
+    .step p { font-size:14.5px; color:var(--ink-soft); margin:0; }
+    @media (max-width:920px){ .steps{ grid-template-columns: 1fr 1fr; } }
+    @media (max-width:560px){ .steps{ grid-template-columns: 1fr; } }
+
+    .search-mock {
+      background:#fff; border:1px solid var(--line); border-radius: var(--radius-lg); padding: 22px; display:grid; grid-template-columns: 1.4fr 1fr 1fr auto; gap:12px; align-items:end;
+      box-shadow: 0 20px 50px -30px rgba(20,20,15,.18);
+    }
+    [data-theme="dark"] .search-mock { background: var(--surface); }
+    .sf-field label { display:block; font-size:12px; font-weight:700; color:var(--ink-mute); margin-bottom:6px; letter-spacing:0.02em; text-transform:uppercase; }
+    .sf-field .val { font-size:15px; font-weight:700; color:var(--ink); display:flex; align-items:center; gap:8px; padding:10px 14px; background:var(--bg-soft); border-radius:10px; }
+    @media (max-width:760px){ .search-mock{ grid-template-columns: 1fr; } }
+
+    .sitter-grid { display:grid; grid-template-columns: repeat(3,1fr); gap:20px; margin-top:24px; }
+    .sitter { background:#fff; border:1px solid var(--line-soft); border-radius: var(--radius-lg); overflow:hidden; transition: transform .25s, box-shadow .25s; }
+    [data-theme="dark"] .sitter { background: var(--surface); }
+    .sitter:hover { transform: translateY(-4px); box-shadow: 0 24px 60px -30px rgba(20,20,15,.25); }
+    .sitter .ph { aspect-ratio: 5/4; background: var(--bg-soft); overflow:hidden; position:relative; }
+    .sitter .ph img { width:100%; height:100%; object-fit:cover; transition: transform .6s; }
+    .sitter:hover .ph img { transform: scale(1.05); }
+    .sitter .verified { position:absolute; top:12px; left:12px; background:rgba(255,255,255,.95); padding:5px 10px; border-radius:999px; font-size:11.5px; font-weight:800; color:var(--brand); display:inline-flex; align-items:center; gap:6px; }
+    .sitter .verified::before { content:"✓"; }
+    .sitter .body { padding:20px 22px 22px; }
+    .sitter h3 { font-size:18px; margin-bottom:4px; }
+    .sitter .loc { font-size:13px; color:var(--ink-mute); display:flex; align-items:center; gap:6px; }
+    .sitter .tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:14px; }
+    .sitter .tag { font-size:12px; font-weight:700; background: var(--brand-soft); color: var(--brand-deep); padding:4px 10px; border-radius:999px; }
+    .sitter .meta { display:flex; justify-content:space-between; align-items:baseline; margin-top:16px; padding-top:14px; border-top:1px solid var(--line); }
+    .sitter .rate { font-weight:900; font-size:18px; }
+    .sitter .rate span { font-size:12px; font-weight:600; color:var(--ink-mute); }
+    .sitter .stars { font-size:13px; color:var(--accent); font-weight:700; }
+    @media (max-width:920px){ .sitter-grid{ grid-template-columns: 1fr 1fr; } }
+    @media (max-width:560px){ .sitter-grid{ grid-template-columns: 1fr; } }
+
+    .testi-grid { display:grid; grid-template-columns: repeat(3,1fr); gap:20px; }
+    .testi { background:#fff; border:1px solid var(--line-soft); border-radius: var(--radius-lg); padding:28px; display:flex; flex-direction:column; gap:16px; }
+    [data-theme="dark"] .testi { background: var(--surface); }
+    .testi .quote { font-family: var(--serif); font-style: italic; font-size: 20px; line-height: 1.35; color: var(--ink); }
+    .testi .who { display:flex; align-items:center; gap:12px; margin-top:auto; padding-top:14px; border-top:1px solid var(--line-soft); }
+    .testi .av { width:40px; height:40px; border-radius:50%; background:var(--brand-soft); }
+    .testi .n { font-weight:800; font-size:14px; }
+    .testi .s { font-size:12.5px; color:var(--ink-mute); }
+    @media (max-width:760px){ .testi-grid{ grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body data-screen-label="05 Tierhalter">
+
+  <header class="site-header">
+    <div class="container nav">
+      <a href="index.html" class="logo">tigube</a>
+      <nav class="nav-links">
+        <a href="tierhalter.html" class="is-active">Für Tierhalter:innen</a>
+        <a href="betreuer.html">Für Betreuungspersonen</a>
+        <a href="preise.html">Preise</a>
+        <a href="faq.html">FAQ</a>
+        <a href="ueber-uns.html">Über uns</a>
+      </nav>
+      <div class="nav-cta">
+        <a href="#" class="btn btn-ghost btn-sm">Login</a>
+        <a href="#" class="btn btn-primary btn-sm">Registrieren</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="th-hero">
+    <div class="container th-hero-grid">
+      <div class="reveal">
+        <h1>Finde die <span class="accent">richtige Betreuung</span> für dein Tier.</h1>
+        <p class="lead">Geprüfte Betreuungspersonen in deiner Nähe — für Hund, Katze und Kleintier. Lokal, persönlich, transparent.</p>
+        <div class="hero-actions">
+          <a href="#suche" class="btn btn-primary btn-lg">Betreuung finden</a>
+          <a href="#so" class="btn btn-ghost btn-lg">So funktioniert's</a>
+        </div>
+        <div class="th-meta">
+          <div><div class="n">2.400+</div><span class="l">Geprüfte Betreuer:innen</span></div>
+          <div><div class="n">48</div><span class="l">Städte in DACH</span></div>
+          <div><div class="n">98%</div><span class="l">Match-Zufriedenheit</span></div>
+        </div>
+      </div>
+      <div class="hero-card reveal">
+        <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=900&q=80&auto=format&fit=crop" alt="Hund mit Betreuungsperson" />
+        <div class="hero-pill"><span class="avatars"><span class="av">🐾</span><span class="av">♥</span><span class="av">★</span></span>Geprüfte Profile</div>
+        <div class="hero-info">
+          <span class="badge">✓</span>
+          <div><div class="t">Persönliches Briefing</div><div class="s">Jede Person sprechen wir vorher</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="how" id="suche">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Suche, die wirklich passt</h2>
+        <p class="lead">Filter nach Ort, Tierart, Zeitraum und Betreuungsform — die Treffer sind echt erreichbar.</p>
+      </div>
+      <div class="search-mock reveal">
+        <div class="sf-field"><label>Ort</label><div class="val">📍 Hamburg-Eimsbüttel</div></div>
+        <div class="sf-field"><label>Tierart</label><div class="val">🐕 Hund</div></div>
+        <div class="sf-field"><label>Zeitraum</label><div class="val">📅 22.–28. Mai</div></div>
+        <a href="#" class="btn btn-primary">Suchen</a>
+      </div>
+
+      <div class="sitter-grid reveal">
+        <article class="sitter">
+          <div class="ph"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&q=80&auto=format&fit=crop" alt="" /><span class="verified">verifiziert</span></div>
+          <div class="body">
+            <h3>Anna L.</h3>
+            <div class="loc">📍 Eimsbüttel · 1,2 km</div>
+            <div class="tags"><span class="tag">Hund</span><span class="tag">Tagesbetreuung</span><span class="tag">Sachkunde</span></div>
+            <div class="meta"><div class="rate">22€<span>/ Tag</span></div><div class="stars">★ 4.9 · 38</div></div>
+          </div>
+        </article>
+        <article class="sitter">
+          <div class="ph"><img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=600&q=80&auto=format&fit=crop" alt="" /><span class="verified">verifiziert</span></div>
+          <div class="body">
+            <h3>Markus B.</h3>
+            <div class="loc">📍 Altona · 2,8 km</div>
+            <div class="tags"><span class="tag">Hund</span><span class="tag">Gassi</span><span class="tag">Übernachtung</span></div>
+            <div class="meta"><div class="rate">28€<span>/ Tag</span></div><div class="stars">★ 4.8 · 24</div></div>
+          </div>
+        </article>
+        <article class="sitter">
+          <div class="ph"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&q=80&auto=format&fit=crop" alt="" /><span class="verified">verifiziert</span></div>
+          <div class="body">
+            <h3>Sophie K.</h3>
+            <div class="loc">📍 Winterhude · 3,5 km</div>
+            <div class="tags"><span class="tag">Katze</span><span class="tag">Hausbesuch</span><span class="tag">Urlaub</span></div>
+            <div class="meta"><div class="rate">18€<span>/ Besuch</span></div><div class="stars">★ 5.0 · 51</div></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="so">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>In vier Schritten zur Betreuung</h2>
+        <p class="lead">Keine Schnellschüsse, keine Massen-Matchings — nur Verbindungen, die passen.</p>
+      </div>
+      <div class="steps reveal">
+        <div class="step"><span class="num">1</span><h3>Profil anlegen</h3><p>Tier, Bedürfnisse, Adresse — in 2 Minuten erstellt.</p></div>
+        <div class="step"><span class="num">2</span><h3>Suchen &amp; filtern</h3><p>Nach Ort, Tierart, Zeitraum und Erfahrung.</p></div>
+        <div class="step"><span class="num">3</span><h3>Kennenlernen</h3><p>Erstgespräch — oft kostenfrei, immer persönlich.</p></div>
+        <div class="step"><span class="num">4</span><h3>Beruhigt abgeben</h3><p>Direkt buchen, direkt bezahlen — ohne Provision.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="how">
+    <div class="container">
+      <div class="section-head reveal"><h2>Was Halter:innen sagen</h2></div>
+      <div class="testi-grid reveal">
+        <div class="testi">
+          <div class="quote">„Endlich keine Bauchschmerzen mehr, wenn wir verreisen. Anna hat unseren Buddy behandelt wie ihren eigenen Hund."</div>
+          <div class="who"><div class="av"></div><div><div class="n">Lea M.</div><div class="s">Hamburg, Hundehalterin</div></div></div>
+        </div>
+        <div class="testi">
+          <div class="quote">„Das persönliche Briefing hat den Unterschied gemacht — wir wussten sofort, da ist jemand mit Verstand."</div>
+          <div class="who"><div class="av"></div><div><div class="n">Tobias K.</div><div class="s">München, zwei Katzen</div></div></div>
+        </div>
+        <div class="testi">
+          <div class="quote">„Drei Tage Notfall, eine Stunde Suche, perfekte Lösung. Hätte ich nicht für möglich gehalten."</div>
+          <div class="who"><div class="av"></div><div><div class="n">Caro W.</div><div class="s">Wien, Mischlingsrüde</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-head reveal"><h2>Häufige Fragen</h2></div>
+      <div class="faq-narrow reveal">
+        <details class="faq-item"><summary class="faq-trigger">Was kostet die Nutzung als Halter:in?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary><div class="faq-panel"><div><p>Die Suche und Kontaktaufnahme ist kostenlos. Du zahlst direkt an deine Betreuungsperson — wir nehmen keine Provision.</p></div></div></details>
+        <details class="faq-item"><summary class="faq-trigger">Wie sicher sind die Profile?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary><div class="faq-panel"><div><p>Jede Person spricht vor Freischaltung mit unserem Team. Sachkundenachweise und Referenzen sind im Profil ausgewiesen.</p></div></div></details>
+        <details class="faq-item"><summary class="faq-trigger">Geht das auch kurzfristig?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary><div class="faq-panel"><div><p>Ja — Median-Antwortzeit liegt bei 24h. Für akute Notfälle gibt es einen Express-Filter.</p></div></div></details>
+      </div>
+      <div class="faq-foot reveal"><a href="faq.html">Alle Fragen ansehen →</a></div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-card reveal">
+        <div class="cta-text">
+          <h2>Bereit, die richtige Betreuung zu finden?</h2>
+          <p>Kostenlos starten, ohne Verpflichtung — und dein Tier in gute Hände geben.</p>
+          <div class="actions"><a href="#" class="btn btn-primary">Kostenlos starten</a><a href="preise.html" class="btn btn-ghost">Preise ansehen</a></div>
+        </div>
+        <div class="cta-image"><img src="https://images.unsplash.com/photo-1552053831-71594a27632d?w=800&q=80&auto=format&fit=crop" alt="" /></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand"><a href="index.html" class="logo">tigube</a><p>Deutschlands vertrauensvolle Plattform für professionelle Tierbetreuung.</p></div>
+        <div class="footer-col"><h4>Für Tierhalter:innen</h4><ul><li><a href="tierhalter.html">Betreuer finden</a></li><li><a href="preise.html">Preise</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
+        <div class="footer-col"><h4>Für Betreuungspersonen</h4><ul><li><a href="betreuer.html">Anbieten</a></li></ul></div>
+        <div class="footer-col"><h4>Unternehmen</h4><ul><li><a href="ueber-uns.html">Über uns</a></li><li><a href="#">Kontakt</a></li><li><a href="#">Impressum</a></li><li><a href="#">Datenschutz</a></li></ul></div>
+      </div>
+      <div class="footer-bottom"><span>© 2026 tigube.</span><span>Mit ♥ gemacht in Moos &amp; Hamburg</span></div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script type="text/babel" src="tweaks-panel.jsx"></script>
+  <script type="text/babel" src="tweaks.jsx"></script>
+  <script src="script.js"></script>
+</body>
+</html>

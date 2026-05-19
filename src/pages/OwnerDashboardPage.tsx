@@ -28,6 +28,7 @@ import { OWNER_SERVICE_TAGS } from '../lib/constants/ownerServices';
 import DashboardReleaseTeaser from '../components/dashboard/DashboardReleaseTeaser';
 import { ensurePlzCoordinatesCached } from '../lib/geocoding';
 import ToastContainer from '../components/ui/ToastContainer';
+import { useToast } from '../hooks/useToast';
 import { requestOwnerApproval } from '../lib/services/ownerApprovalService';
 
 // Typ für Haustier-Formulare

@@ -92,6 +92,7 @@ function App() {
             <Route path="/faq" element={<FaqPage />} />
             <Route path="/preise" element={<PricingPage />} />
             <Route path="/mitgliedschaften" element={<PricingPage />} />
+            <Route path="/aktion" element={<Navigate to="/" replace />} />
             <Route path="/pricing" element={<Navigate to="/mitgliedschaften" replace />} />
             <Route path="/payment/success" element={<PaymentSuccessPage />} />
             <Route path="/blog" element={<BlogListPage />} />
